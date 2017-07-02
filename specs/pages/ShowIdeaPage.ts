@@ -6,27 +6,27 @@ export class ShowIdeaPage extends Page {
   }
 
   @findBy('.idea-header .header')
-  private title: WebElementPromise;
+  public Title: WebElementPromise;
 
   @findBy('div > span')
-  private description: WebElementPromise;
+  public Description: WebElementPromise;
 
   @findBy('.support-counter .value')
-  private supportCounter: WebElementPromise;
+  public SupportCounter: WebElementPromise;
 
   public async waitForLoad(): Promise<void> {
-    await this.browser.waitUntilIsVisible(() => this.title);
+    await this.browser.waitUntilIsVisible(() => this.Title);
   }
 
   public async getTitle(): Promise<string> {
-    return await this.title.getText();
+    return await this.Title.getText();
   }
 
   public async getDescription(): Promise<string> {
-    return await this.description.getText();
+    return await this.Description.getText();
   }
 
   public async getSupportCount(): Promise<number> {
-    return parseInt(await this.supportCounter.getText(), 10);
+    return parseInt(await this.SupportCounter.getText(), 10);
   }
 }

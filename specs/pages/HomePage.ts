@@ -9,39 +9,37 @@ export class HomePage extends Page {
   }
 
   @findBy('#new-idea-input')
-  private ideaTitle: WebElementPromise;
+  public IdeaTitle: WebElementPromise;
 
   @findBy('.ui.form textarea')
-  private ideaDescription: WebElementPromise;
+  public IdeaDescription: WebElementPromise;
 
   @findBy('.ui.button.primary')
-  private submitIdea: WebElementPromise;
+  public SubmitIdea: WebElementPromise;
 
   @findBy('.signin')
-  private userMenu: WebElementPromise;
+  public UserMenu: WebElementPromise;
 
   @findBy('.fdr-profile-popup .button.google')
-  private googleSignIn: WebElementPromise;
+  public GoogleSignIn: WebElementPromise;
 
   public async waitForLoad(): Promise<void> {
-    await this.browser.waitUntilIsVisible(() => this.ideaTitle);
+    await this.browser.waitUntilIsVisible(() => this.IdeaTitle);
   }
 
   public async getUserName(): Promise<string> {
-    return await this.userMenu.getText();
+    return await this.UserMenu.getText();
   }
 
-  public async typeNewIdea(title: string, description: string): Promise<void> {
-    await this.ideaTitle.sendKeys(title);
-    await this.ideaDescription.sendKeys(description);
-    await this.submitIdea.click();
+  public async submitNewIdea(): Promise<void> {
+    await this.SubmitIdea.click();
     await this.browser.waitForPage(ShowIdeaPage);
   }
 
-  public async signInWithGoogle(): Promise<void> {
-    await this.userMenu.click();
-    await this.browser.waitUntilIsVisible(() => this.googleSignIn);
-    await this.googleSignIn.click();
+  public async clickAtSignInWithGoogle(): Promise<void> {
+    await this.UserMenu.click();
+    await this.browser.waitUntilIsVisible(() => this.GoogleSignIn);
+    await this.GoogleSignIn.click();
     await this.browser.waitForPage(GoogleSignInPage);
   }
 }

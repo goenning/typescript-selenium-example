@@ -7,27 +7,27 @@ export class GoogleSignInPage extends Page {
   }
 
   @findBy('#identifierId')
-  private email: WebElementPromise;
+  public Email: WebElementPromise;
 
   @findBy('#identifierNext')
-  private next: WebElementPromise;
+  public Next: WebElementPromise;
 
   @findBy('input[type="password"]')
-  private password: WebElementPromise;
+  public Password: WebElementPromise;
 
   @findBy('#passwordNext')
-  private confirm: WebElementPromise;
+  public Confirm: WebElementPromise;
 
   public async logInAs(email: string, password: string) {
-    await this.email.sendKeys(email);
-    await this.next.click();
-    await this.browser.waitUntilIsVisible(() => this.password);
-    await this.password.sendKeys(password);
-    await this.confirm.click();
+    await this.Email.sendKeys(email);
+    await this.Next.click();
+    await this.browser.waitUntilIsVisible(() => this.Password);
+    await this.Password.sendKeys(password);
+    await this.Confirm.click();
     await this.browser.waitForPage(HomePage);
   }
 
   public async waitForLoad(): Promise<void> {
-    await this.browser.waitUntilIsVisible(() => this.email);
+    await this.browser.waitUntilIsVisible(() => this.Email);
   }
 }
