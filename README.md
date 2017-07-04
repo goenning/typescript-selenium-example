@@ -17,11 +17,11 @@ The tests are available in both TDD and BDD style.
 └── config.ts
 ```
 
-- `lib`: Think of this as a "framework". Ideally should be a separate module distributed on `npm`;
-- `pages`: These are your `Page Object` models. Each Page of your application should have a PageObject that maps all the elements and actions.
+- `lib`: Think of this as a "framework". Ideally should be a separate module distributed on `npm`
+- `pages`: These are your `Page Object` models. Each Page of your application should have a PageObject that maps all the elements and actions
 - `specs`: All your BDD-style tests goes here
 - `tests`: All your TDD-style/classic tests goes here
-- `config.ts`: General configuration and settings that are read by tests.
+- `config.ts`: General configuration and settings that are read by tests
 
 ## Test Case #1: Unauthenticated cannot submit ideas
 
