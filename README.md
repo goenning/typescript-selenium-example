@@ -34,8 +34,8 @@ After new idea is submitted, user should be redirect to the new idea's display p
 
 # See the tests
 
-- TDD: [specs/spec.ts](specs/spec.ts)
-- BDD: [tests/test.ts](tests/test.ts)
+- TDD: [tests/test.ts](tests/test.ts)
+- BDD: [specs/spec.ts](specs/spec.ts)
 
 # TODO:
 
