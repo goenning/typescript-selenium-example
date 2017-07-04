@@ -1,4 +1,4 @@
-import { WebElementPromise, Browser, Page, findBy } from '../../lib';
+import { WebElementPromise, Browser, Page, findBy } from '../lib';
 import { ShowIdeaPage, GoogleSignInPage } from './';
 import config from '../config';
 
@@ -25,10 +25,6 @@ export class HomePage extends Page {
 
   public async waitForLoad(): Promise<void> {
     await this.browser.waitUntilIsVisible(() => this.IdeaTitle);
-  }
-
-  public async getUserName(): Promise<string> {
-    return await this.UserMenu.getText();
   }
 
   public async submitNewIdea(): Promise<void> {

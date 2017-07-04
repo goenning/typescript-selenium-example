@@ -1,9 +1,6 @@
-require('chromedriver');
-
-import { Builder, ThenableWebDriver, WebElement, By, WebElementPromise, promise } from 'selenium-webdriver';
+import 'chromedriver';
+import { Builder, ThenableWebDriver, WebElement, By, WebElementPromise } from 'selenium-webdriver';
 import { NewablePage, Page } from './page';
-
-export { WebElementPromise };
 
 export class Browser {
   private driver: ThenableWebDriver;

@@ -24,6 +24,9 @@
         "member-ordering": [
             false
         ],
+        "no-console": [
+            false
+        ],
         "object-literal-shorthand": false
     },
     "rulesDirectory": []

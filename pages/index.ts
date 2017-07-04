@@ -1,7 +1,7 @@
 import { GoogleSignInPage } from './GoogleSignInPage';
 import { HomePage } from './HomePage';
 import { ShowIdeaPage } from './ShowIdeaPage';
-import { Browser } from '../../lib';
+import { Browser } from '../lib';
 
 export {
   GoogleSignInPage,

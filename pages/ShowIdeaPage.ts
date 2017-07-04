@@ -1,4 +1,4 @@
-import { WebElementPromise, Browser, Page, findBy } from '../../lib';
+import { WebElementPromise, Browser, Page, findBy } from '../lib';
 
 export class ShowIdeaPage extends Page {
   constructor(browser: Browser) {
@@ -16,17 +16,5 @@ export class ShowIdeaPage extends Page {
 
   public async waitForLoad(): Promise<void> {
     await this.browser.waitUntilIsVisible(() => this.Title);
-  }
-
-  public async getTitle(): Promise<string> {
-    return await this.Title.getText();
-  }
-
-  public async getDescription(): Promise<string> {
-    return await this.Description.getText();
-  }
-
-  public async getSupportCount(): Promise<number> {
-    return parseInt(await this.SupportCounter.getText(), 10);
   }
 }

@@ -8,7 +8,9 @@ export function findBy(selector: string) {
         configurable: true,
         enumerable: true,
         get: function() {
-          return (this as any).browser.findElement(selector);
+          const promise = (this as any).browser.findElement(selector);
+          promise.selector = selector;
+          return promise;
         },
     });
   };
