@@ -1,12 +1,12 @@
 # TypeScript + Selenium example
 
-This is a working example of using `Selenium`, `TypeScript` and `Page Object Pattern`.
+This is a working example of using `Selenium`, `TypeScript` and [Page Object Pattern](https://martinfowler.com/bliki/PageObject.html).
 These are real test cases that run against a [Fider](http://getfider.com) instance.
 Check out a running example of the application at [http://demo.fider.io](http://demo.fider.io).
 
 The tests are available in both TDD and BDD style.
 
-# How it works
+# How it is structured
 
 ```
 .
@@ -36,10 +36,3 @@ After new idea is submitted, user should be redirect to the new idea's display p
 
 - TDD: [tests/test.ts](tests/test.ts)
 - BDD: [specs/spec.ts](specs/spec.ts)
-
-# TODO:
-
-Write about How it works (- TDD (tests) or BDD (specs) style, differences, - @findBy decorator)
-Write about benefits like (- Both use same objects, - Tests are decoupled from UI, - Easy to write new tests by reusing Page objects)
-
-explain each folder
