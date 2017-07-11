@@ -23,8 +23,11 @@ export class HomePage extends Page {
   @findBy('.fdr-profile-popup .button.google')
   public GoogleSignIn: WebElementPromise;
 
-  public async waitForLoad(): Promise<void> {
-    await this.browser.waitUntilIsVisible(() => this.IdeaTitle);
+  @findBy('.ui.form .ui.negative.message')
+  public ErrorBox: WebElementPromise;
+
+  public loadCondition() {
+    return this.browser.elementIsVisible(() => this.IdeaTitle);
   }
 
   public async submitNewIdea(title: string, description: string): Promise<void> {
@@ -34,7 +37,7 @@ export class HomePage extends Page {
     await this.browser.waitForPage(ShowIdeaPage);
   }
 
-  public async clickAtSignInWithGoogle(): Promise<void> {
+  public async signInWithGoogle(): Promise<void> {
     await this.UserMenu.click();
     await this.browser.waitUntilIsVisible(() => this.GoogleSignIn);
     await this.GoogleSignIn.click();

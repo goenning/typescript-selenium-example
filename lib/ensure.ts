@@ -14,6 +14,21 @@ class Ensurer {
     }
   }
 
+  public async isVisible() {
+    let displayed = false;
+    const selector = (this.element as any).selector;
+
+    try {
+      displayed = await this.element.isDisplayed();
+    } catch (ex) {
+      displayed = false;
+    }
+
+    if (!displayed) {
+      throw new Error(`Element ${this.selector} is not visible`);
+    }
+  }
+
   public async isNotVisible() {
     let displayed = false;
     const selector = (this.element as any).selector;

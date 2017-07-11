@@ -1,4 +1,4 @@
-import { Browser } from './browser';
+import { Browser, WaitCondition } from './browser';
 
 export interface NewablePage<T extends Page> {
   new(browser: Browser): T;
@@ -13,10 +13,10 @@ export abstract class Page {
 
   public async navigate(): Promise<void> {
     await this.browser.navigate(this.url);
-    await this.waitForLoad();
+    await this.browser.waitUntilAny(this.loadCondition());
   }
 
-  public abstract async waitForLoad(): Promise<void>;
+  public abstract loadCondition(): WaitCondition;
 
   public constructor(protected browser: Browser) {
 

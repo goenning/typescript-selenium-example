@@ -27,7 +27,7 @@ specification('Users can submit ideas', () => {
 
   when('user sign in', async () => {
     action(async () => {
-      await pages.home.clickAtSignInWithGoogle();
+      await pages.home.signInWithGoogle();
       await pages.google.signInAsDarthVader();
     });
 

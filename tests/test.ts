@@ -9,7 +9,7 @@ describe('Submit ideas', () => {
     pages = new AllPages(new Browser('chrome'));
   });
 
-  it('TestCase #1: Unauthenticated cannot submit ideas', async () => {
+  it('Test Case #1: Unauthenticated cannot submit ideas', async () => {
     // Action
     await pages.home.navigate();
     await pages.home.IdeaTitle.sendKeys('Add support to TypeScript');
@@ -25,7 +25,7 @@ describe('Submit ideas', () => {
   it('Test Case #2: Authenticated can submit ideas', async () => {
     // Action
     await pages.home.navigate();
-    await pages.home.clickAtSignInWithGoogle();
+    await pages.home.signInWithGoogle();
     await pages.google.signInAsDarthVader();
 
     // Assert

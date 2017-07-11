@@ -19,6 +19,10 @@ export class GoogleSignInPage extends Page {
   @findBy('#passwordNext')
   public ConfirmPassword: WebElementPromise;
 
+  public loadCondition() {
+    return this.browser.elementIsVisible(() => this.Email);
+  }
+
   public async signInAsDarthVader() {
     return this.signInAs(config.users.darthvader.email, config.users.darthvader.password);
   }
@@ -30,9 +34,5 @@ export class GoogleSignInPage extends Page {
     await this.Password.sendKeys(password);
     await this.ConfirmPassword.click();
     await this.browser.waitForPage(HomePage);
-  }
-
-  public async waitForLoad(): Promise<void> {
-    await this.browser.waitUntilIsVisible(() => this.Email);
   }
 }

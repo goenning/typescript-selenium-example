@@ -14,7 +14,7 @@ export class ShowIdeaPage extends Page {
   @findBy('.support-counter .value')
   public SupportCounter: WebElementPromise;
 
-  public async waitForLoad(): Promise<void> {
-    await this.browser.waitUntilIsVisible(() => this.Title);
+  public loadCondition() {
+    return this.browser.elementIsVisible(() => this.Title);
   }
 }
