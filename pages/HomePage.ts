@@ -27,7 +27,9 @@ export class HomePage extends Page {
     await this.browser.waitUntilIsVisible(() => this.IdeaTitle);
   }
 
-  public async submitNewIdea(): Promise<void> {
+  public async submitNewIdea(title: string, description: string): Promise<void> {
+    await this.IdeaTitle.sendKeys(title);
+    await this.IdeaDescription.sendKeys(description);
     await this.SubmitIdea.click();
     await this.browser.waitForPage(ShowIdeaPage);
   }

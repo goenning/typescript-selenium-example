@@ -1,4 +1,5 @@
 import { Browser, ensure } from '../lib';
+import { Builder, ThenableWebDriver, WebElement, By, WebElementPromise, until } from 'selenium-webdriver';
 import { AllPages } from '../pages';
 
 describe('Submit ideas', () => {
@@ -31,9 +32,7 @@ describe('Submit ideas', () => {
     await ensure(pages.home.UserMenu).textIs('Darth Vader');
 
     // Action
-    await pages.home.IdeaTitle.sendKeys('Add support to TypeScript');
-    await pages.home.IdeaDescription.sendKeys('Because the language and community is awesome! :)');
-    await pages.home.submitNewIdea();
+    await pages.home.submitNewIdea('Add support to TypeScript', 'Because the language and community is awesome! :)');
 
     // Assert
     await Promise.all([

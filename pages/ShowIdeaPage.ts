@@ -8,7 +8,7 @@ export class ShowIdeaPage extends Page {
   @findBy('.idea-header .header')
   public Title: WebElementPromise;
 
-  @findBy('div > span')
+  @findBy('div.description')
   public Description: WebElementPromise;
 
   @findBy('.support-counter .value')

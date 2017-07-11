@@ -37,9 +37,7 @@ specification('Users can submit ideas', () => {
 
     when('new idea is submitted', async () => {
       action(async () => {
-        await pages.home.IdeaTitle.sendKeys('Add support to TypeScript');
-        await pages.home.IdeaDescription.sendKeys('Because the language and community is awesome! :)');
-        await pages.home.submitNewIdea();
+        await pages.home.submitNewIdea('Add support to TypeScript', 'Because the language and community is awesome! :)');
       });
 
       then('it should have 1 supporter', async () => {
