@@ -1,6 +1,7 @@
 import 'chromedriver';
 import { Builder, ThenableWebDriver, WebElement, By, WebElementPromise } from 'selenium-webdriver';
 import { NewablePage, Page } from './page';
+import { WebComponent } from './components';
 
 export type WaitCondition = () => Promise<boolean>;
 
@@ -33,7 +34,7 @@ export class Browser {
     });
   }
 
-  public async waitUntilIsVisible(locator: () => WebElementPromise) {
+  public async waitUntilIsVisible(locator: () => WebComponent) {
     await this.waitUntilAny(this.elementIsVisible(locator));
   }
 
@@ -41,7 +42,7 @@ export class Browser {
     await this.waitUntilAny(this.pageHasLoaded(page));
   }
 
-  public elementIsVisible(locator: () => WebElementPromise) {
+  public elementIsVisible(locator: () => WebComponent) {
     return async () => await locator().isDisplayed();
   }
 

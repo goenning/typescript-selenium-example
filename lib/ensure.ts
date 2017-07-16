@@ -1,8 +1,9 @@
 import { WebElementPromise } from 'selenium-webdriver';
+import { WebComponent } from './';
 
 class Ensurer {
   private selector: string;
-  constructor(private element: WebElementPromise) {
+  constructor(private element: WebComponent) {
     this.selector = (this.element as any).selector;
   }
 
@@ -16,7 +17,6 @@ class Ensurer {
 
   public async isVisible() {
     let displayed = false;
-    const selector = (this.element as any).selector;
 
     try {
       displayed = await this.element.isDisplayed();
@@ -25,13 +25,12 @@ class Ensurer {
     }
 
     if (!displayed) {
-      throw new Error(`Element ${this.selector} is not visible`);
+      throw new Error(`Element ${this.element.selector} is not visible`);
     }
   }
 
   public async isNotVisible() {
     let displayed = false;
-    const selector = (this.element as any).selector;
 
     try {
       displayed = await this.element.isDisplayed();
@@ -40,11 +39,11 @@ class Ensurer {
     }
 
     if (displayed) {
-      throw new Error(`Element ${this.selector} is visible`);
+      throw new Error(`Element ${this.element.selector} is visible`);
     }
   }
 }
 
-export const ensure = (element: WebElementPromise) => {
+export const ensure = (element: WebComponent) => {
   return new Ensurer(element);
 };

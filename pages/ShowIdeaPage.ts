@@ -1,4 +1,4 @@
-import { WebElementPromise, Browser, Page, findBy } from '../lib';
+import { WebComponent, Browser, Page, findBy } from '../lib';
 
 export class ShowIdeaPage extends Page {
   constructor(browser: Browser) {
@@ -6,13 +6,13 @@ export class ShowIdeaPage extends Page {
   }
 
   @findBy('.idea-header .header')
-  public Title: WebElementPromise;
+  public Title: WebComponent;
 
   @findBy('div.description')
-  public Description: WebElementPromise;
+  public Description: WebComponent;
 
   @findBy('.support-counter .value')
-  public SupportCounter: WebElementPromise;
+  public SupportCounter: WebComponent;
 
   public loadCondition() {
     return this.browser.elementIsVisible(() => this.Title);

@@ -1,4 +1,4 @@
-import { WebElementPromise, Browser, Page, findBy } from '../lib';
+import { WebComponent, Browser, Page, findBy, Button, TextInput } from '../lib';
 import { ShowIdeaPage, GoogleSignInPage } from './';
 import config from '../config';
 
@@ -9,30 +9,30 @@ export class HomePage extends Page {
   }
 
   @findBy('#new-idea-input')
-  public IdeaTitle: WebElementPromise;
+  public IdeaTitle: TextInput;
 
   @findBy('.ui.form textarea')
-  public IdeaDescription: WebElementPromise;
+  public IdeaDescription: TextInput;
 
   @findBy('.ui.button.primary')
-  public SubmitIdea: WebElementPromise;
+  public SubmitIdea: Button;
 
   @findBy('.signin')
-  public UserMenu: WebElementPromise;
+  public UserMenu: WebComponent;
 
   @findBy('.fdr-profile-popup .button.google')
-  public GoogleSignIn: WebElementPromise;
+  public GoogleSignIn: Button;
 
   @findBy('.ui.form .ui.negative.message')
-  public ErrorBox: WebElementPromise;
+  public ErrorBox: WebComponent;
 
   public loadCondition() {
     return this.browser.elementIsVisible(() => this.IdeaTitle);
   }
 
   public async submitNewIdea(title: string, description: string): Promise<void> {
-    await this.IdeaTitle.sendKeys(title);
-    await this.IdeaDescription.sendKeys(description);
+    await this.IdeaTitle.type(title);
+    await this.IdeaDescription.type(description);
     await this.SubmitIdea.click();
     await this.browser.waitForPage(ShowIdeaPage);
   }

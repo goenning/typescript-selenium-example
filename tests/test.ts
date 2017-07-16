@@ -12,7 +12,7 @@ describe('Submit ideas', () => {
   it('Test Case #1: Unauthenticated cannot submit ideas', async () => {
     // Action
     await pages.home.navigate();
-    await pages.home.IdeaTitle.sendKeys('Add support to TypeScript');
+    await pages.home.IdeaTitle.type('Add support to TypeScript');
 
     // Assert
     await Promise.all([

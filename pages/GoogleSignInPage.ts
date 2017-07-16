@@ -1,4 +1,4 @@
-import { WebElementPromise, Browser, Page, findBy } from '../lib';
+import { TextInput, Button, Browser, Page, findBy } from '../lib';
 import { HomePage } from './';
 import config from '../config';
 
@@ -8,16 +8,16 @@ export class GoogleSignInPage extends Page {
   }
 
   @findBy('#identifierId')
-  public Email: WebElementPromise;
+  public Email: TextInput;
 
   @findBy('#identifierNext')
-  public ConfirmEmail: WebElementPromise;
+  public ConfirmEmail: Button;
 
   @findBy('input[type="password"]')
-  public Password: WebElementPromise;
+  public Password: TextInput;
 
   @findBy('#passwordNext')
-  public ConfirmPassword: WebElementPromise;
+  public ConfirmPassword: Button;
 
   public loadCondition() {
     return this.browser.elementIsVisible(() => this.Email);
@@ -28,10 +28,10 @@ export class GoogleSignInPage extends Page {
   }
 
   public async signInAs(email: string, password: string) {
-    await this.Email.sendKeys(email);
+    await this.Email.type(email);
     await this.ConfirmEmail.click();
     await this.browser.waitUntilIsVisible(() => this.Password);
-    await this.Password.sendKeys(password);
+    await this.Password.type(password);
     await this.ConfirmPassword.click();
     await this.browser.waitForPage(HomePage);
   }

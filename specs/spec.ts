@@ -16,7 +16,7 @@ specification('Users can submit ideas', () => {
 
     when('title is typed', async () => {
       action(async () => {
-        await pages.home.IdeaTitle.sendKeys('Add support to TypeScript');
+        await pages.home.IdeaTitle.type('Add support to TypeScript');
       });
 
       then('it should not display submit button after typing idea', async () => {

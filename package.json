@@ -16,6 +16,7 @@
     "@types/selenium-webdriver": "^3.0.4",
     "chromedriver": "^2.30.1",
     "mocha": "^3.4.2",
+    "reflect-metadata": "^0.1.10",
     "selenium-webdriver": "^3.4.0",
     "tslint": "^5.4.3",
     "typescript": "^2.4.1"
