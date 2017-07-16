@@ -1,9 +1,6 @@
 import 'chromedriver';
 import { Builder, ThenableWebDriver, WebElement, By, WebElementPromise } from 'selenium-webdriver';
-import { NewablePage, Page } from './page';
-import { WebComponent } from './components';
-
-export type WaitCondition = () => Promise<boolean>;
+import { Page, NewablePage, WebComponent, WaitCondition } from './';
 
 export class Browser {
   private driver: ThenableWebDriver;
@@ -19,36 +16,23 @@ export class Browser {
     return this.driver.findElement(By.css(selector));
   }
 
-  public async waitUntilAny(conditions: WaitCondition | WaitCondition[]): Promise<void> {
+  public async wait(condition: WaitCondition) {
+    await this.waitAny(condition);
+  }
+
+  public async waitAny(conditions: WaitCondition | WaitCondition[]): Promise<void> {
     const all = (!(conditions instanceof Array)) ? [ conditions ] : conditions;
 
     await this.driver.wait(async () => {
         for (const condition of all) {
           try {
-            return await condition();
+            return await condition(this);
           } catch (ex) {
             continue;
           }
         }
         return null;
     });
-  }
-
-  public async waitUntilIsVisible(locator: () => WebComponent) {
-    await this.waitUntilAny(this.elementIsVisible(locator));
-  }
-
-  public async waitForPage<T extends Page>(page: NewablePage<T>) {
-    await this.waitUntilAny(this.pageHasLoaded(page));
-  }
-
-  public elementIsVisible(locator: () => WebComponent) {
-    return async () => await locator().isDisplayed();
-  }
-
-  public pageHasLoaded<T extends Page>(page: NewablePage<T>) {
-    const thePage = new page(this);
-    return thePage.loadCondition();
   }
 
   public async close(): Promise<void> {

@@ -1,4 +1,4 @@
-import { WebComponent, Browser, Page, findBy, Button, TextInput } from '../lib';
+import { WebComponent, Browser, Page, findBy, Button, TextInput, elementIsVisible, pageHasLoaded } from '../lib';
 import { ShowIdeaPage, GoogleSignInPage } from './';
 import config from '../config';
 
@@ -27,20 +27,20 @@ export class HomePage extends Page {
   public ErrorBox: WebComponent;
 
   public loadCondition() {
-    return this.browser.elementIsVisible(() => this.IdeaTitle);
+    return elementIsVisible(() => this.IdeaTitle);
   }
 
   public async submitNewIdea(title: string, description: string): Promise<void> {
     await this.IdeaTitle.type(title);
     await this.IdeaDescription.type(description);
     await this.SubmitIdea.click();
-    await this.browser.waitForPage(ShowIdeaPage);
+    await this.browser.wait(pageHasLoaded(ShowIdeaPage));
   }
 
   public async signInWithGoogle(): Promise<void> {
     await this.UserMenu.click();
-    await this.browser.waitUntilIsVisible(() => this.GoogleSignIn);
+    await this.browser.wait(elementIsVisible(() => this.GoogleSignIn));
     await this.GoogleSignIn.click();
-    await this.browser.waitForPage(GoogleSignInPage);
+    await this.browser.wait(pageHasLoaded(GoogleSignInPage));
   }
 }

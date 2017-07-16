@@ -1,4 +1,4 @@
-import { WebComponent, Browser, Page, findBy } from '../lib';
+import { WebComponent, Browser, Page, findBy, elementIsVisible } from '../lib';
 
 export class ShowIdeaPage extends Page {
   constructor(browser: Browser) {
@@ -15,6 +15,6 @@ export class ShowIdeaPage extends Page {
   public SupportCounter: WebComponent;
 
   public loadCondition() {
-    return this.browser.elementIsVisible(() => this.Title);
+    return elementIsVisible(() => this.Title);
   }
 }
