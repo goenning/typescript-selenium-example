@@ -1,13 +1,6 @@
 import { WebElementPromise } from 'selenium-webdriver';
 
-export interface WebComponent {
-  selector: string;
-  isDisplayed(): Promise<boolean>;
-  getText(): Promise<string>;
-  click(): Promise<void>;
-}
-
-export class SimpleWebComponent implements WebComponent {
+export class WebComponent {
   constructor(protected element: WebElementPromise, public selector: string) { }
 
   public async click() {
@@ -15,7 +8,11 @@ export class SimpleWebComponent implements WebComponent {
   }
 
   public async isDisplayed() {
-    return await this.element.isDisplayed();
+    try {
+      return await this.element.isDisplayed();
+    } catch (ex) {
+      return false;
+    }
   }
 
   public async getText() {
@@ -23,13 +20,21 @@ export class SimpleWebComponent implements WebComponent {
   }
 }
 
-export class Button extends SimpleWebComponent {
+export class Button extends WebComponent {
   constructor(element: WebElementPromise, selector: string) {
     super(element, selector);
   }
+
+  public async isDisabled() {
+    try {
+      return await this.element.getAttribute('disabled') === 'disabled';
+    } catch (ex) {
+      return false;
+    }
+  }
 }
 
-export class TextInput extends SimpleWebComponent {
+export class TextInput extends WebComponent {
   constructor(element: WebElementPromise, selector: string) {
     super(element, selector);
   }
