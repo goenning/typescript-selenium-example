@@ -49,7 +49,7 @@ specification('Users can submit ideas', () => {
       });
 
       then('it should show correct description', async () => {
-        ensure(pages.showIdea.Description).textIs('Because the language and community is awesome! :)');
+        await ensure(pages.showIdea.Description).textIs('Because the language and community is awesome! :)');
       });
     });
   });
