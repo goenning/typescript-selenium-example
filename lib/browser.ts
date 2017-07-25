@@ -24,14 +24,16 @@ export class Browser {
     const all = (!(conditions instanceof Array)) ? [ conditions ] : conditions;
 
     await this.driver.wait(async () => {
-        for (const condition of all) {
-          try {
-            return await condition(this);
-          } catch (ex) {
-            continue;
+      for (const condition of all) {
+        try {
+          if (await condition(this) === true) {
+            return true;
           }
+          continue;
+        } catch (ex) {
+          continue;
         }
-        return null;
+      }
     });
   }
 
