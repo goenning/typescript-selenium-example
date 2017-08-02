@@ -1,5 +1,5 @@
 import { WebComponent, Browser, Page, findBy, Button, TextInput, elementIsVisible, pageHasLoaded } from '../lib';
-import { ShowIdeaPage, GoogleSignInPage } from './';
+import { ShowIdeaPage, GoogleSignInPage, FacebookSignInPage } from './';
 import config from '../config';
 
 export class HomePage extends Page {
@@ -23,8 +23,11 @@ export class HomePage extends Page {
   @findBy('.fdr-profile-popup .button.google')
   public GoogleSignIn: Button;
 
-  @findBy('.ui.form .ui.negative.message')
-  public ErrorBox: WebComponent;
+  @findBy('.fdr-profile-popup .button.facebook')
+  public FacebookSignIn: Button;
+
+  @findBy('.signout')
+  private SignOut: Button;
 
   public loadCondition() {
     return elementIsVisible(() => this.IdeaTitle);
@@ -37,10 +40,40 @@ export class HomePage extends Page {
     await this.browser.wait(pageHasLoaded(ShowIdeaPage));
   }
 
+  public async signOut(): Promise<void> {
+    try {
+      await this.SignOut.click();
+    } catch (ex) {
+      return;
+    }
+    await this.browser.wait(pageHasLoaded(HomePage));
+  }
+
   public async signInWithGoogle(): Promise<void> {
+    await this.browser.clearCookies('https://accounts.google.com');
+    await this.signOut();
+
+    await this.signIn(() => this.GoogleSignIn);
+    await this.browser.waitAny([
+      pageHasLoaded(GoogleSignInPage),
+      pageHasLoaded(HomePage),
+    ]);
+  }
+
+  public async signInWithFacebook(): Promise<void> {
+    await this.browser.clearCookies('https://facebook.com');
+    await this.signOut();
+
+    await this.signIn(() => this.FacebookSignIn);
+    await this.browser.waitAny([
+      pageHasLoaded(FacebookSignInPage),
+      pageHasLoaded(HomePage),
+    ]);
+  }
+
+  private async signIn(locator: () => WebComponent): Promise<void> {
     await this.UserMenu.click();
-    await this.browser.wait(elementIsVisible(() => this.GoogleSignIn));
-    await this.GoogleSignIn.click();
-    await this.browser.wait(pageHasLoaded(GoogleSignInPage));
+    await this.browser.wait(elementIsVisible(locator));
+    await locator().click();
   }
 }

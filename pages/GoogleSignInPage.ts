@@ -24,7 +24,7 @@ export class GoogleSignInPage extends Page {
   }
 
   public async signInAsDarthVader() {
-    return this.signInAs(config.users.darthvader.email, config.users.darthvader.password);
+    return this.signInAs('darthvader.fider@gmail.com', process.env.DARTHVADER_PASSWORD!);
   }
 
   public async signInAs(email: string, password: string) {

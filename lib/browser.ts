@@ -16,6 +16,17 @@ export class Browser {
     return this.driver.findElement(By.css(selector));
   }
 
+  public async clearCookies(url?: string): Promise<void> {
+    if (url) {
+      const currentUrl = await this.driver.getCurrentUrl();
+      await this.navigate(url);
+      await this.driver.manage().deleteAllCookies();
+      await this.navigate(currentUrl);
+    } else {
+      await this.driver.manage().deleteAllCookies();
+    }
+  }
+
   public async wait(condition: WaitCondition) {
     await this.waitAny(condition);
   }
