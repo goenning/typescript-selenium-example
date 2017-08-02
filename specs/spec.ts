@@ -37,7 +37,7 @@ specification('Users can submit ideas', () => {
 
     when('new idea is submitted', async () => {
       action(async () => {
-        await pages.home.submitNewIdea('Add support to TypeScript', 'Because the language and community is awesome! :)');
+        await pages.home.submitNewIdea('Host a TypeScript workshop!', 'Workshop would be useful to have hands-on practice with the language.');
       });
 
       then('it should have 1 supporter', async () => {
@@ -45,11 +45,11 @@ specification('Users can submit ideas', () => {
       });
 
       then('it should show correct title', async () => {
-        await ensure(pages.showIdea.Title).textIs('Add support to TypeScript');
+        await ensure(pages.showIdea.Title).textIs('Host a TypeScript workshop!');
       });
 
       then('it should show correct description', async () => {
-        await ensure(pages.showIdea.Description).textIs('Because the language and community is awesome! :)');
+        await ensure(pages.showIdea.Description).textIs('Workshop would be useful to have hands-on practice with the language.');
       });
     });
   });
